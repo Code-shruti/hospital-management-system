@@ -2,10 +2,12 @@
 from fastapi import FastAPI
 from sqlalchemy import text
 from app.models.patient import Patient
+from app.models.doctor import Doctor
 from app.database import engine
 from contextlib import asynccontextmanager
 from app.database import Base
 from app.routers.patient import router as patient_router
+from app.routers.doctor import router as doctor_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -21,6 +23,7 @@ app = FastAPI(
 )
 
 app.include_router(patient_router)
+app.include_router(doctor_router)
 
 @app.get("/")
 async def home():
